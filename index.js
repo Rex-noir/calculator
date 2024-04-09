@@ -10,8 +10,33 @@ let result = document.querySelector('.result-text');
 //Key pressed
 function keyPressed(e){
     let element = e.target;
+    let symbols = element.textContent;
     let numbers = parseInt(element.textContent);
+
     if(numbers == "00" || (numbers >= 0 && numbers <= 9)){
         result.textContent += String(element.textContent);
+    }
+
+    if(symbols == "Del") deleteAndClear("delete");
+    if(symbols == "AC") deleteAndClear("clear");
+    if(symbols == "=") operate();
+    else{
+        result.textContent += String(element.textContent);
+    }
+
+}
+
+//specific funtions
+function deleteAndClear(type){
+    let numbers = result.textContent;
+    if (type == "delete"){
+
+        if(numbers.length > 0){
+            let newNumbers = numbers.slice(0, numbers.length - 1);
+            result.textContent = newNumbers;
+        }
+    }
+    else if(type == "clear"){
+        result.textContent = "";
     }
 }
