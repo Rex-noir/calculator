@@ -49,5 +49,18 @@ function divideNumbers(array){
     return result;
 }
 
-
-export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers};
+//findModulo
+function findModulo(array){
+    let result = array.reduce((acc, value)=>{
+        return acc % value;
+    })
+    if (result === 0) {
+        // Check if the value is negative zero
+        if (1 / result === -Infinity) {
+            // Convert negative zero to regular zero
+            return 0;
+        }
+    }
+    return result;
+}
+export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, findModulo};
