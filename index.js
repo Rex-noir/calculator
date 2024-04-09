@@ -1,4 +1,4 @@
-import { addNumbers } from "./functions.js";
+import { addNumbers , message} from "./functions.js";
 
 let buttons = document.querySelectorAll(".button");
 buttons.forEach((button)=>{
@@ -17,9 +17,9 @@ function keyPressed(e){
         result.textContent += String(element.textContent);
     }
 
-    if(symbols == "Del") deleteAndClear("delete");
-    if(symbols == "AC") deleteAndClear("clear");
-    if(symbols == "=") operate();
+    else if(symbols == "Del") deleteAndClear("delete");
+    else if(symbols == "AC") deleteAndClear("clear");
+    else if(symbols == "=") operate(result.textContent);
     else{
         result.textContent += String(element.textContent);
     }
