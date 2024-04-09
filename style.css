@@ -28,10 +28,16 @@ body{
     display: flex;
     justify-content: center;
     font-weight:300;
+    overflow-x: auto;
 }
 .logMsg span{
     font-size: 20px;
     padding: 10px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow-x: auto;    /* Enables horizontal scrolling */
+    display: block;      /* Ensures span behaves like a block element */
+    width: 100%;        /* Adjust width as needed */
+
 }
 
 .result-screen{
