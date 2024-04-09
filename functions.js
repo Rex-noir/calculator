@@ -70,16 +70,25 @@ function findModulo(array){
 //logMsg
 function message(text){
     let msgH = document.querySelector(".logMsg span");
+    let container = document.querySelector(".logMsg");
 
     if (text){
+        container.style.backgroundColor = "blue";
+        msgH.style.color = "white";
         msgH.textContent = text;
         setTimeout(() => {
+            container.style.backgroundColor = "white";
+            msgH.style.color = "black";
             msgH.textContent = "Ace Calculator";
-        }, 5000);
+        }, 4000);
     }
     else{
+        container.style.backgroundColor = "black";
+        msgH.style.color = "red";
         msgH.textContent = "Message details not specified";
         setTimeout(() => {
+            container.style.backgroundColor = "white";
+            msgH.style.color = "black";
             msgH.textContent = "Ace Calculator";
         }, 5000);
     }
