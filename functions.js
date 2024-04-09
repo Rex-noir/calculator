@@ -33,5 +33,11 @@ function subtractNumbers(array){
 
     return result;
 }
-
-export {createHtmlElement, addNumbers, subtractNumbers};
+//multiply numbers
+function multiplyNumbers(array){
+    let result = array.reduce((acc, value)=>{
+        return acc * value;
+    })
+    return result;
+}
+export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers};
