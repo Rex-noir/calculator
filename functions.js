@@ -9,4 +9,13 @@ function createHtmlElement(tagName, className, tagId){
     return node;
 }
 
-export {createHtmlElement};
+//adding function
+function addNumbers(array){
+    let restult = array.reduce((acc, value)=>{
+        return acc + value;
+    })
+
+    return restult;
+}
+
+export {createHtmlElement, addNumbers, subtractNumbers};
