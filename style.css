@@ -77,3 +77,11 @@ body{
     background-color: rgb(68, 65, 64);
     color: rgb(255, 255, 255);
 }
+
+.ac{
+    background-color: rgba(210, 223, 32, 0.651);
+}
+.operator{
+    background-color: blue;
+    color: aliceblue;
+}
