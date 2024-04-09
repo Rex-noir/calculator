@@ -40,4 +40,14 @@ function multiplyNumbers(array){
     })
     return result;
 }
-export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers};
+
+//divideNumbers
+function divideNumbers(array){
+    let result = array.reduce((acc, value)=>{
+        return acc / value;
+    })
+    return result;
+}
+
+
+export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers};
