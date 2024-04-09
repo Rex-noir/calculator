@@ -11,11 +11,27 @@ function createHtmlElement(tagName, className, tagId){
 
 //adding function
 function addNumbers(array){
-    let restult = array.reduce((acc, value)=>{
+    let result = array.reduce((acc, value)=>{
         return acc + value;
     })
 
-    return restult;
+    return result;
+}
+//subtract function
+function subtractNumbers(array){
+    let result = array.reduce((acc, value)=>{
+        let total = 0;
+        if (value < 0) {
+            value = Math.abs(value);
+        }
+        else if(value > 0){
+            value *= -1;
+        }
+        total = acc - value;
+        return total;
+    })
+
+    return result;
 }
 
 export {createHtmlElement, addNumbers, subtractNumbers};
