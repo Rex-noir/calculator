@@ -10,6 +10,8 @@ let result = document.querySelector('.result-text');
 //Key pressed
 function keyPressed(e){
     let element = e.target;
-    //clear result first
-    result.textContent += String(element.textContent);
+    let numbers = parseInt(element.textContent);
+    if(numbers == "00" || (numbers >= 0 && numbers <= 9)){
+        result.textContent += String(element.textContent);
+    }
 }
