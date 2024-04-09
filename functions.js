@@ -44,6 +44,9 @@ function multiplyNumbers(array){
 //divideNumbers
 function divideNumbers(array){
     let result = array.reduce((acc, value)=>{
+        if (value == 0 || acc == 0){
+            return "Divide by zero!!"
+        }
         return acc / value;
     })
     return result;
