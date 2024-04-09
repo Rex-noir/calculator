@@ -66,4 +66,22 @@ function findModulo(array){
     }
     return result;
 }
-export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, findModulo};
+
+//logMsg
+function message(text){
+    let msgH = document.querySelector(".logMsg span");
+
+    if (text){
+        msgH.textContent = text;
+        setTimeout(() => {
+            msgH.textContent = "Ace Calculator";
+        }, 5000);
+    }
+    else{
+        msgH.textContent = "Message details not specified";
+        setTimeout(() => {
+            msgH.textContent = "Ace Calculator";
+        }, 5000);
+    }
+}
+export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, findModulo, message};
