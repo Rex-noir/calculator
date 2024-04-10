@@ -1,4 +1,4 @@
-import { addNumbers , message} from "./functions.js";
+import { addNumbers , message, multiplyNumbers} from "./functions.js";
 
 let buttons = document.querySelectorAll(".button");
 buttons.forEach((button)=>{
@@ -11,7 +11,7 @@ let result = document.querySelector('.result-text');
 function keyPressed(e){
     let element = e.target;
     let symbols = element.textContent;
-    let numbers = parseInt(element.textContent);
+    let numbers = (element.textContent);
 
     if(numbers == "00" || (numbers >= 0 && numbers <= 9)){
         result.textContent += String(element.textContent);
@@ -37,7 +37,7 @@ document.addEventListener("keypress", (event)=>{
         switch(key){
             case 'Enter':
             case '=':
-                operate(result);
+                operate(result.textContent);
                 break;
             
             case '/':
@@ -79,7 +79,7 @@ function deleteAndClear(type){
 function operate(alphanumerics){
     
     if (validateOperator(alphanumerics).valid){
-        calculate(alphanumerics);
+        result.textContent = calculate(alphanumerics);
     }
     else{
         message(validateOperator(alphanumerics).message);
@@ -89,10 +89,10 @@ function operate(alphanumerics){
 //validating
 function validateOperator(alphanumerics){
     const consecutiveModRegex = /(?:mod){2,}/;
-    if(isOperator(alphanumerics[0])){
+    if(isOperator(alphanumerics[0]) || isOperator(alphanumerics[alphanumerics.length-1])){
         return {
             valid:false,
-            message:"Can't put operators as the first one!"
+            message:"First and last should not be OP!"
         }
     }
     if(consecutiveModRegex.test(alphanumerics)) return {
@@ -111,4 +111,56 @@ function validateOperator(alphanumerics){
 function isOperator(char){
     const operators= /(?:×|\+|÷|-|mod)/;
     return operators.test(char);
+}
+//calculate fn
+function calculate(problem){
+    let result = 0;
+    let multi = doMulti(problem);
+    console.log(((multi)));
+    return result;
+}
+
+function doMulti(problem){
+    let newProb = [];
+    if(problem.indexOf("×") == -1){
+        return problem;
+    }
+    let numbers = getNumbers(problem, problem.indexOf("×"));
+    console.log(numbers.numbers[0]);
+
+    let multiFirst = multiplyNumbers(numbers.numbers);
+    console.log(problem);
+    newProb = (problem.slice(0,numbers.leftPos)
+                    .concat([multiFirst])
+                    .concat(problem.slice(numbers.rightPos+1)));
+    return doMulti(newProb);
+}
+
+//get numbers near the operators
+function getNumbers(problem, position){
+    let leftPosition = position;
+    let rightPosition = position;
+    let numbers = [];
+    let leftSide =[];
+    let rightSide = [];
+
+    while(leftPosition >0 && !isOperator(problem[leftPosition-1])){
+        if (!isNaN(parseFloat(problem[leftPosition - 1]))|| problem[leftPosition - 1] === '.') {
+            leftSide.unshift(problem[leftPosition - 1]); // Store digits and dot in reverse order
+        }        leftPosition--;
+    }
+    numbers.push((leftSide.join('')));
+
+    while(rightPosition <problem.length && !isOperator(problem[rightPosition+1])){
+        if (!isNaN((problem[rightPosition + 1])) || problem[rightPosition + 1] === '.') {
+            rightSide.push(problem[rightPosition + 1]); // Store digits and dot in order
+        }        rightPosition++;
+    }
+    numbers.push((rightSide.join('')));
+
+    return {
+        numbers :numbers,
+        rightPos : rightPosition,
+        leftPos : leftPosition,
+    };
 }
