@@ -31,6 +31,10 @@ function multiplyNumbers(array){
     })
     return result;
 }
+//check if it is float
+function isFloat(number){
+    return Math.ceil(number) !== Math.floor(number);
+}
 //divideNumbers
 function divideNumbers(array){
     let result = array.reduce((acc, value)=>{
@@ -39,6 +43,9 @@ function divideNumbers(array){
         }
         return acc / value;
     })
+    if(isFloat(result)){
+        return Math.round(result * 10000000000) / 10000000000;
+    }
     return result;
 }
 
@@ -83,4 +90,4 @@ function message(text){
         }, 5000);
     }
 }
-export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, findModulo, message};
+export {createHtmlElement, addNumbers, subtractNumbers, multiplyNumbers, divideNumbers, findModulo, message, isFloat};
