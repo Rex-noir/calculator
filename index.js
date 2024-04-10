@@ -1,4 +1,4 @@
-import { addNumbers , message, multiplyNumbers} from "./functions.js";
+import { addNumbers , divideNumbers, findModulo, message, multiplyNumbers, subtractNumbers} from "./functions.js";
 
 let buttons = document.querySelectorAll(".button");
 buttons.forEach((button)=>{
@@ -115,27 +115,58 @@ function isOperator(char){
 //calculate fn
 function calculate(problem){
     let result = 0;
-    let multi = doMulti(problem);
-    console.log(((multi)));
+    let doMulti = doTheMath(problem,"×");
+    let findMod = doTheMath(doMulti, "mod");
+    let doDivision = doTheMath(findMod,"÷");
+    let doAddition = doTheMath(doDivision, "+");
+    let doSubtraction = doTheMath(doAddition, "-");
+
+    console.log("Result :", doSubtraction);
+    result = doSubtraction;
     return result;
 }
 
-function doMulti(problem){
+//Do the match
+function doTheMath(problem, operator){
     let newProb = [];
-    if(problem.indexOf("×") == -1){
+    if(problem.indexOf(operator) == -1){
         return problem;
     }
-    let numbers = getNumbers(problem, problem.indexOf("×"));
+    let numbers = getNumbers(problem, problem.indexOf(operator));
     console.log(numbers.numbers[0]);
 
-    let multiFirst = multiplyNumbers(numbers.numbers);
+    let newResult = handleOperators(numbers, operator);   
+
     console.log(problem);
     newProb = (problem.slice(0,numbers.leftPos)
-                    .concat([multiFirst])
+                    .concat([newResult])
                     .concat(problem.slice(numbers.rightPos+1)));
-    return doMulti(newProb);
-}
 
+    return doTheMath(newProb);
+}
+function handleOperators(numbers, operator){
+    let finalResult = 0;
+    switch(operator){
+        case "×":
+            finalResult = multiplyNumbers(numbers.numbers);
+            break;
+        case "÷":
+            finalResult = divideNumbers(numbers.numbers);
+            break;
+        case "+":
+            finalResult = addNumbers(numbers.numbers);
+            break;
+        case "-":
+            finalResult = subtractNumbers(numbers.numbers);
+            break;
+        case "mod":
+            finalResult = findModulo(numbers.numbers);
+            break;
+        default:
+            message("Operator unknown");
+    }
+    return finalResult;
+}
 //get numbers near the operators
 function getNumbers(problem, position){
     let leftPosition = position;
@@ -149,15 +180,15 @@ function getNumbers(problem, position){
             leftSide.unshift(problem[leftPosition - 1]); // Store digits and dot in reverse order
         }        leftPosition--;
     }
-    numbers.push((leftSide.join('')));
-
+    numbers.push(parseFloat(leftSide.join('')));
+    
     while(rightPosition <problem.length && !isOperator(problem[rightPosition+1])){
         if (!isNaN((problem[rightPosition + 1])) || problem[rightPosition + 1] === '.') {
             rightSide.push(problem[rightPosition + 1]); // Store digits and dot in order
         }        rightPosition++;
     }
-    numbers.push((rightSide.join('')));
-
+    numbers.push(parseFloat(rightSide.join('')));
+    
     return {
         numbers :numbers,
         rightPos : rightPosition,
