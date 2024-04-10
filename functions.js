@@ -20,17 +20,8 @@ function addNumbers(array){
 //subtract function
 function subtractNumbers(array){
     let result = array.reduce((acc, value)=>{
-        let total = 0;
-        if (value < 0) {
-            value = Math.abs(value);
-        }
-        else if(value > 0){
-            value *= -1;
-        }
-        total = acc - value;
-        return total;
+        return acc-value;
     })
-
     return result;
 }
 //multiply numbers
@@ -40,7 +31,6 @@ function multiplyNumbers(array){
     })
     return result;
 }
-
 //divideNumbers
 function divideNumbers(array){
     let result = array.reduce((acc, value)=>{
