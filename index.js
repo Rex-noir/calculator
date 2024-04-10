@@ -1,4 +1,4 @@
-import { addNumbers , divideNumbers, findModulo, message, multiplyNumbers, subtractNumbers} from "./functions.js";
+import { addNumbers , divideNumbers, findModulo, message, multiplyNumbers, subtractNumbers, isFloat} from "./functions.js";
 
 let buttons = document.querySelectorAll(".button");
 buttons.forEach((button)=>{
@@ -120,9 +120,9 @@ function calculate(problem){
     let doDivision = doTheMath(findMod,"÷");
     let doAddition = doTheMath(doDivision, "+");
     let doSubtraction = doTheMath(doAddition, "-");
-
-    console.log("Result :", doSubtraction);
+    
     result = doSubtraction;
+
     return result;
 }
 
@@ -133,7 +133,6 @@ function doTheMath(problem, operator){
         return problem;
     }
     let numbers = getNumbers(problem, problem.indexOf(operator));
-    console.log(numbers.numbers[0]);
 
     let newResult = handleOperators(numbers, operator);   
 
@@ -188,7 +187,7 @@ function getNumbers(problem, position){
         }        rightPosition++;
     }
     numbers.push(parseFloat(rightSide.join('')));
-    
+
     return {
         numbers :numbers,
         rightPos : rightPosition,
