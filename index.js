@@ -25,7 +25,42 @@ function keyPressed(e){
     }
 
 }
+//Keyboard listening
+document.addEventListener("keypress", (event)=>{
+    let key = event.key;
+    let numbers = ['0','1','2','3','4','5','6','7','8','9','.','+','-'];
 
+    if (numbers.includes(key)){
+        result.textContent += key;
+    }
+    else{
+        switch(key){
+            case 'Enter':
+            case '=':
+                operate(result);
+                break;
+            
+            case '/':
+                result.textContent += '÷';
+                break;
+            case '*':
+                result.textContent += '×';
+                break;
+            case 'x':
+                result.textContent += '×';
+                break;
+            case 'Backspace':
+                deleteAndClear("delete");
+                break;
+            case 'Delete':
+                deleteAndClear("delete");
+                break;
+            default:
+                message("Keyboard doesn't match anything!");
+        }
+    }
+
+})
 //specific funtions
 function deleteAndClear(type){
     let numbers = result.textContent;
