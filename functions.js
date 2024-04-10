@@ -68,14 +68,15 @@ function findModulo(array){
 function message(text){
     let msgH = document.querySelector(".logMsg span");
     let container = document.querySelector(".logMsg");
-
+    let oriColor = msgH.style.backgroundColor;
+    let oriBgColor = container.style.backgroundColor;
     if (text){
         container.style.backgroundColor = "blue";
         msgH.style.color = "white";
         msgH.textContent = text;
         setTimeout(() => {
-            container.style.backgroundColor = "white";
-            msgH.style.color = "black";
+            container.style.backgroundColor = oriBgColor;
+            msgH.style.color = oriColor;
             msgH.textContent = "Ace Calculator";
         }, 4000);
     }
@@ -84,8 +85,8 @@ function message(text){
         msgH.style.color = "red";
         msgH.textContent = "Message details not specified";
         setTimeout(() => {
-            container.style.backgroundColor = "white";
-            msgH.style.color = "black";
+            container.style.backgroundColor = oriBgColor;
+            msgH.style.color = oriColor;
             msgH.textContent = "Ace Calculator";
         }, 5000);
     }
