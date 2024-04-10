@@ -40,3 +40,35 @@ function deleteAndClear(type){
         result.textContent = "";
     }
 }
+//operate
+function operate(alphanumerics){
+    
+    if (validateOperator(alphanumerics).valid){
+        message("Valid");
+    }
+    else{
+        message(validateOperator(alphanumerics).message);
+    }
+
+}
+//validating
+function validateOperator(alphanumerics){
+    const consecutiveModRegex = /(?:mod){2,}/;
+    if(consecutiveModRegex.test(alphanumerics)) return {
+        valid:false,
+        message:"Consecutive opertaors found!"
+    }
+
+    for (let i = 0; i < alphanumerics.length -1; i++){
+        
+        if(isOperator(alphanumerics[i]) && isOperator(alphanumerics[i+1])) {
+            return{valid:false,message:"Consecutive opertaors found!"}
+        }
+    }
+    return { valid: true, message: "Success!" };
+
+}
+function isOperator(char){
+    const operators= /(?:×|\+|÷|-|mod)/;
+    return operators.test(char);
+}
