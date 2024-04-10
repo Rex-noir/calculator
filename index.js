@@ -44,7 +44,7 @@ function deleteAndClear(type){
 function operate(alphanumerics){
     
     if (validateOperator(alphanumerics).valid){
-        message("Valid");
+        calculate(alphanumerics);
     }
     else{
         message(validateOperator(alphanumerics).message);
@@ -54,13 +54,18 @@ function operate(alphanumerics){
 //validating
 function validateOperator(alphanumerics){
     const consecutiveModRegex = /(?:mod){2,}/;
+    if(isOperator(alphanumerics[0])){
+        return {
+            valid:false,
+            message:"Can't put operators as the first one!"
+        }
+    }
     if(consecutiveModRegex.test(alphanumerics)) return {
         valid:false,
         message:"Consecutive opertaors found!"
     }
 
     for (let i = 0; i < alphanumerics.length -1; i++){
-        
         if(isOperator(alphanumerics[i]) && isOperator(alphanumerics[i+1])) {
             return{valid:false,message:"Consecutive opertaors found!"}
         }
